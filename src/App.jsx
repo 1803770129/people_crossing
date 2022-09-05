@@ -31,6 +31,7 @@ function App() {
 
   return (
     <World>
+      <div style={{position:'absolute',top:0,zIndex:'9999'}}>NOIR</div>
       <Skybox texture="5.jpg" textureRepeat={30} physics="map" />
         <Cube width={9999} depth={9999} y={-100} onClick={handleClick} texture="ground.jpg" textureRepeat={30} />
         <ThirdPersonCamera active mouseControl>
