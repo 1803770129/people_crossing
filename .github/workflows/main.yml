@@ -9,6 +9,12 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+    paths:
+          - '/github/workflows/*'
+          - 'src/**'
+          - 'Dockerfile'
+          - 'public/**'
+          - 'dist/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,15 +30,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # git pull 
       - uses: actions/checkout@v3
-      # 安装node.js
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      # 打印node版本
-      - name: Use Node.js
-        run :
-              node -v
-              npm -v
-              echo 'actions~'
+      # 步骤名称
+    - name: yarn install
+      # 步骤执行指令
+      run: yarn install
+    - name: yarn build
+      run: yarn build
+    - name: Deploy
+      uses: cross-the-world/scp-pipeline@master
+      env:
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.SAMIR_HOST }}
+        user: ${{ secrets.NAME }}
+        pass: ${{ secrets.SAMIR_PWD }}
+        connect_timeout: 10s
+        local: './dist/*'
+        remote: /home/nginx/3d/people_crossing/dist
       
