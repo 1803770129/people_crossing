@@ -1,7 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-
 name: build and deploy
-
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
@@ -15,37 +13,32 @@ on:
           - 'Dockerfile'
           - 'public/**'
           - 'dist/**'
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # git pull 
       - uses: actions/checkout@v3
       # 步骤名称
-    - name: yarn install
+      - name: yarn install
       # 步骤执行指令
-      run: yarn install
-    - name: yarn build
-      run: yarn build
-    - name: Deploy
-      uses: cross-the-world/scp-pipeline@master
-      env:
-        WELCOME: "ssh scp ssh pipelines"
-        LASTSSH: "Doing something after copying"
-      with:
-        host: ${{ secrets.SAMIR_HOST }}
-        user: ${{ secrets.NAME }}
-        pass: ${{ secrets.SAMIR_PWD }}
-        connect_timeout: 10s
-        local: './dist/*'
-        remote: /home/nginx/3d/people_crossing/dist
+        run: yarn install
+      - name: yarn build
+        run: yarn build
+      - name: Deploy
+        uses: cross-the-world/scp-pipeline@master
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.SAMIR_HOST }}
+          user: ${{ secrets.NAME }}
+          pass: ${{ secrets.SAMIR_PWD }}
+          connect_timeout: 10s
+          local: './dist/*'
+          remote: /home/nginx/3d/people_crossing/dist
       
