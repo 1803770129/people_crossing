@@ -24,6 +24,8 @@ jobs:
       # git pull 
       - uses: actions/checkout@v3
       # 步骤名称
+      -name : git pull
+        run: git pull
       - name: yarn install
       # 步骤执行指令
         run: yarn install
