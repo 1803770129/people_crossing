@@ -50,7 +50,6 @@ const Mesh = () => {
 
         // 当加载正在进行时被调用的函数，参数将是XMLHttpRequest实例，其包含了 .total （总的）和 .loaded （已加载的）字节数。
         function onProgress(xhr) {
-
             if (xhr.lengthComputable) {
 
                 const percentComplete = xhr.loaded / xhr.total * 100;
@@ -63,7 +62,7 @@ const Mesh = () => {
         // 声明mmd模型、动作、环境、相机、音声文件
         const modelFile = 'kq/kq.pmx'; // 刻晴模型
         const actionFile = ['kq/jimingyue-motion.vmd']; // 寄明月动作
-        const cameraFile = ['kq/camera.vmd']; // 寄明月相机
+        const cameraFile = ['kq/Camera.vmd']; // 寄明月相机
         const audioFile = 'kq/jmy.wav'; // 寄明月音声
         const audioParams = { delayTime: 160 * 1 / 30 };
 
